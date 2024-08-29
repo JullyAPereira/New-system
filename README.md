@@ -1,5 +1,5 @@
 # PDV-carro
 
-# develop - desenvolvimento
-# homolog - teste 
-# main - produção
+- develop - desenvolvimento
+- homolog - teste 
+- main - produção
