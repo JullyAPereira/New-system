@@ -1,36 +1,97 @@
 class OperacaoCompra {
     constructor(numero, data, cliente, vendedor, veiculo, valor) {
-        this.numero = numero; // Número da operação
-        this.data = data; // Data
-        this.cliente = cliente; // Cliente (instância da classe Cliente)
-        this.vendedor = vendedor; // Vendedor (instância da classe Vendedor)
-        this.veiculo = veiculo; // Veículo (instância da classe Veiculo)
-        this.valor = valor; // Valor da compra
+        this.numero = numero; 
+        this.data = data; 
+        this.cliente = cliente; 
+        this.vendedor = vendedor; 
+        this.veiculo = veiculo;
+        this.valor = valor; 
     }
 }
+
+
+const operacoesCompra = [];
+
+
+function adicionarOperacaoCompra(cliente, veiculo, valor) {
+    const operacao = { cliente, veiculo, valor, tipo: 'compra' };
+    operacoesCompra.push(operacao);
+    salvarDados();
+}
+
+
+function salvarDados() {
+    const dados = JSON.stringify(operacoesCompra);
+    console.log('Dados salvos:', dados);
+}
+
+
+adicionarOperacaoCompra('João Silva', 'Toyota Corolla 2020', 75000);
+
 class OperacaoVenda {
     constructor(numero, data, cliente, vendedor, veiculo, valorEntrada, valorFinanciado, valorTotal) {
-        this.numero = numero; // Número da operação
-        this.data = data; // Data
-        this.cliente = cliente; // Cliente (instância da classe Cliente)
-        this.vendedor = vendedor; // Vendedor (instância da classe Vendedor)
-        this.veiculo = veiculo; // Veículo (instância da classe Veiculo)
-        this.valorEntrada = valorEntrada; // Valor de entrada
-        this.valorFinanciado = valorFinanciado; // Valor financiado
-        this.valorTotal = valorTotal; // Valor total
+        this.numero = numero;
+        this.data = data; 
+        this.cliente = cliente; 
+        this.vendedor = vendedor;
+        this.veiculo = veiculo;
+        this.valorEntrada = valorEntrada;
+        this.valorFinanciado = valorFinanciado;
+        this.valorTotal = valorTotal;
     }
 }
+
+
+
+
+const operacoesVenda = [];
+
+function adicionarOperacaoVenda(vendedor, veiculo, valor) {
+    const operacao = { vendedor, veiculo, valor, tipo: 'venda' };
+    operacoesVenda.push(operacao);
+    salvarDados();
+}
+
+
+function salvarDados() {
+    const dados = JSON.stringify(operacoesVenda);
+    console.log('Dados salvos:', dados);
+}
+
+
+adicionarOperacaoVenda('Maria Souza', 'Toyota Corolla 2020', 80000);
+
+
 class Pedido {
     constructor(numero, data, cliente, vendedor, montadora, modelo, ano, cor, acessorios, valor) {
-        this.numero = numero; // Número do pedido
-        this.data = data; // Data
-        this.cliente = cliente; // Cliente (instância da classe Cliente)
-        this.vendedor = vendedor; // Vendedor (instância da classe Vendedor)
-        this.montadora = montadora; // Montadora
-        this.modelo = modelo; // Modelo
-        this.ano = ano; // Ano
-        this.cor = cor; // Cor
-        this.acessorios = acessorios; // Acessórios
-        this.valor = valor; // Valor
+        this.numero = numero; 
+        this.data = data; 
+        this.cliente = cliente;
+        this.vendedor = vendedor; 
+        this.montadora = montadora; 
+        this.modelo = modelo; 
+        this.ano = ano; 
+        this.cor = cor; 
+        this.acessorios = acessorios; 
+        this.valor = valor; 
     }
 }
+
+
+const pedidos = [];
+
+
+function adicionarPedido(cliente, veiculo, status) {
+    const pedido = { cliente, veiculo, status };
+    pedidos.push(pedido);
+    salvarDados();
+}
+
+
+function salvarDados() {
+    const dados = JSON.stringify(pedidos);
+    console.log('Dados salvos:', dados);
+}
+
+
+adicionarPedido('João Silva', 'Toyota Corolla 2020', 'Pendente');
