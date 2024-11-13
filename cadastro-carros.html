@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Veículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000; 
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: #f2f2f2;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #9b9b9b;
+            color: black;
+        }
+
+       
+        body {
+            padding-top: 60px; 
+             }
+
+        .container {
+            display: flex;
+            justify-content: center; 
+            align-items: center;    
+            height: 100vh;  
+            padding: 20px;
+        }
+
+        .form-container {
+            width: 40%; 
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 8px;  
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px; 
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #574d40;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #a06e45;
+        }
+
+        .image-container {
+            width: 35%; 
+            height: 500px;
+            background-image: url('https://i.pinimg.com/736x/4a/2a/c9/4a2ac9eaf70a88c469753ca82be14651.jpg'); /* Coloque o caminho da imagem */
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+         @media (max-width: 768px) {
+        .formbold-main-wrapper img {
+        display: none !important;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="navbar">
+        <a href="Indexx.php">Home</a>
+        <a href="cadastro-clientes.html">Cadastro de Clientes</a>
+        <a href="consulta-clientes.html">Consulta de Clientes</a>
+        <a href="cadastro-carros.html">Cadastrar Carros</a>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <h1>Cadastro de Veículos</h1>
+
+            <form action="cadastro-carros.php" method="POST" enctype="multipart/form-data">
+                <label for="chassi">Número do Chassi:</label>
+                <input type="text" name="chassi" id="chassi" required><br>
+
+                <label for="placa">Placa:</label>
+                <input type="text" name="placa" id="placa" required><br>
+
+                <label for="marca">Marca:</label>
+                <input type="text" name="marca" id="marca" required><br>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" name="modelo" id="modelo" required><br>
+
+                <label for="ano_fabricacao">Ano de Fabricação:</label>
+                <input type="number" name="ano_fabricacao" id="ano_fabricacao" min="1900" max="2099" required><br>
+
+                <label for="ano_modelo">Ano do Modelo:</label>
+                <input type="number" name="ano_modelo" id="ano_modelo" min="1900" max="2099" required><br>
+
+                <label for="cor">Cor:</label>
+                <input type="text" name="cor" id="cor" required><br>
+
+                <label for="valor">Valor (R$):</label>
+                <input type="number" name="valor" id="valor" step="0.01" required><br>
+
+                <label for="foto">Foto do Veículo:</label>
+                <input type="file" name="foto" id="foto" accept="image/*"><br>
+
+                <input type="submit" value="Cadastrar Veículo">
+            </form>
+        </div>
+
+      
+        <div class="image-container"></div>
+    </div>
+</body>
+</html>
