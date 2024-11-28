@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Clientes</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e2e0e0;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+
+        
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .navbar a {
+            color: #f2f2f2;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        
+        .form-container, .table-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-container input[type="text"], .form-container input[type="submit"] {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+     
+    @media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto; 
+    }
+
+    table, th, td {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar a {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+   
+    table {
+        display: block; 
+        width: 100%;
+    }
+
+    thead {
+        display: none; 
+    }
+
+    tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        font-size: 12px;
+        border: none;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #333;
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 6px;
+        }
+        
+        th, td {
+            padding: 6px 4px; 
+            word-break: break-word; 
+        }
+
+        th:nth-child(1), td:nth-child(1) { width: 120px; } 
+        th:nth-child(2), td:nth-child(2) { width: 100px; } 
+        th:nth-child(3), td:nth-child(3) { width: 140px; }
+        th:nth-child(4), td:nth-child(4) { width: 160px; }
+        th:nth-child(5), td:nth-child(5) { width: 100px; } 
+        th:nth-child(6), td:nth-child(6) { width: 80px; } 
+        th:nth-child(7), td:nth-child(7) { width: 120px; }
+        th:nth-child(8), td:nth-child(8) { width: 80px; }
+        th:nth-child(9), td:nth-child(9) { width: 100px; } 
+
+        th {
+            background-color: #353535;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .delete-btn {
+            color: #fff;
+            background-color: #e74c3c;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .status-reprovado {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .status-aprovado {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="Indexx.php">Home</a>
+        <a href="cadastro-clientes.html">Cadastro de Clientes</a>
+        <a href="consulta-clientes.html">Consulta de Clientes</a>
+        <a href="cadastro-carros.html">Cadastrar Carros</a>
+    </div>
+
+    <div class="form-container">
+        <h2>Consulta de Clientes</h2>
+        <form method="POST" action="consulta.php" onsubmit="return buscarClientes(event)">
+            <input type="text" name="nome" id="nome" placeholder="Digite o nome do cliente">
+            <input type="submit" value="Buscar Cliente">
+        </form>
+    </div>
+
+    <div class="table-container">
+        <table id="clientes-tabela">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Data de Nascimento</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Renda</th>
+                    <th>Financiamento</th>
+                    <th>Foto</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="clientes-dados">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function buscarClientes(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+
+            fetch('consulta.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'nome=' + encodeURIComponent(nome)
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('clientes-dados').innerHTML = data;
+            });
+        }
+
+        function apagarCliente(id) {
+            if (confirm("Tem certeza que deseja excluir este cliente?")) {
+                fetch('consulta.php?delete_id=' + id)
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        buscarClientes(new Event('submit'));
+                    });
+            }
+        }
+    </script>
+
+</body>
+</html>
